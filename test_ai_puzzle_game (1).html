@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Puzzle Game Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #1E90FF;
+            color: white;
+            overflow: hidden;
+        }
+        .game-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: black;
+            position: relative;
+        }
+        .word-box {
+            font-size: 28px;
+            font-weight: bold;
+            color: #E77728;
+            margin: 20px;
+            background: #f8ff9a;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .input-box {
+            font-size: 18px;
+            padding: 10px;
+            width: 80%;
+            border: 2px solid #2F97C1;
+            border-radius: 5px;
+        }
+        .button {
+            padding: 12px 24px;
+            background: #2F97C1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background: #E77728;
+        }
+        #feedback {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .round-indicator {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff5733;
+            margin-top: 10px;
+        }
+        .confetti {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>AI Word Scramble - 3 Rounds!</h1>
+        <p class="round-indicator">Round <span id="round">1</span> of 3</p>
+        <p>Unscramble the letters to form an AI-related word!</p>
+        <div class="word-box" id="scrambled-word"></div>
+        <input type="text" id="user-input" class="input-box" placeholder="Your answer here">
+        <br><br>
+        <button class="button" onclick="checkAnswer()">Submit</button>
+        <p id="feedback"></p>
+    </div>
+    <canvas class="confetti" id="confetti"></canvas>
+
+    <script>
+        const words = ["robot", "machine", "learning", "algorithm", "neural", "data"];
+        let round = 1;
+        let word = words[Math.floor(Math.random() * words.length)];
+        let scrambled = word.split('').sort(() => 0.5 - Math.random()).join('');
+        document.getElementById("scrambled-word").textContent = scrambled;
+
+        function checkAnswer() {
+            const userInput = document.getElementById("user-input").value.toLowerCase();
+            const feedback = document.getElementById("feedback");
+            const roundDisplay = document.getElementById("round");
+
+            if (userInput === word) {
+                feedback.textContent = "🎉 Correct! Next round!";
+                round++;
+                if (round <= 3) {
+                    setTimeout(nextRound, 1000);
+                } else {
+                    feedback.textContent = "🏆 You won all 3 rounds!";
+                    startConfetti();
+                }
+                roundDisplay.textContent = round <= 3 ? round : 3;
+            } else {
+                feedback.textContent = "❌ Try again!";
+            }
+        }
+
+        function nextRound() {
+            document.getElementById("user-input").value = "";
+            word = words[Math.floor(Math.random() * words.length)];
+            scrambled = word.split('').sort(() => 0.5 - Math.random()).join('');
+            document.getElementById("scrambled-word").textContent = scrambled;
+            document.getElementById("feedback").textContent = "Round " + round + "!";
+        }
+
+        function startConfetti() {
+            const canvas = document.getElementById("confetti");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 5 + 2,
+                    d: Math.random() * 10
+                });
+            }
+            function drawConfetti() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    let p = particles[i];
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    ctx.fill();
+                }
+            }
+            function updateConfetti() {
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].y += particles[i].d;
+                    if (particles[i].y > canvas.height) {
+                        particles[i].y = 0;
+                        particles[i].x = Math.random() * canvas.width;
+                    }
+                }
+            }
+            function animateConfetti() {
+                drawConfetti();
+                updateConfetti();
+                requestAnimationFrame(animateConfetti);
+            }
+            animateConfetti();
+        }
+    </script>
+</body>
+</html>
