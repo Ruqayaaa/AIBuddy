@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Jigsaw Puzzle</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #87CEEB;
+            font-family: Arial, sans-serif;
+        }
+        .puzzle-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px;
+            margin: 20px auto;
+            border: 2px solid black;
+        }
+        .piece {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-size: 300px 300px;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <h1>🖼️ Robot Jigsaw Puzzle</h1>
+    <p>Drag the pieces to complete the robot!</p>
+    <div class="puzzle-container" id="puzzle-board"></div>
+    
+    <script>
+        const pieces = [
+            { x: 0, y: 0 }, { x: 100, y: 0 }, { x: 200, y: 0 },
+            { x: 0, y: 100 }, { x: 100, y: 100 }, { x: 200, y: 100 },
+            { x: 0, y: 200 }, { x: 100, y: 200 }, { x: 200, y: 200 }
+        ];
+        const board = document.getElementById("puzzle-board");
+
+        pieces.sort(() => Math.random() - 0.5).forEach((pos, index) => {
+            const piece = document.createElement("div");
+            piece.classList.add("piece");
+            piece.style.backgroundImage = "url('https://source.unsplash.com/300x300/?robot')";
+            piece.style.backgroundPosition = `-${pos.x}px -${pos.y}px`;
+            piece.draggable = true;
+            piece.dataset.index = index;
+            piece.ondragstart = (e) => {
+                e.dataTransfer.setData("text", e.target.dataset.index);
+            };
+            board.appendChild(piece);
+        });
+
+        board.ondragover = (e) => e.preventDefault();
+        board.ondrop = (e) => {
+            const draggedIndex = e.dataTransfer.getData("text");
+            const targetPiece = e.target;
+            if (targetPiece.classList.contains("piece")) {
+                [targetPiece.style.backgroundPosition, board.children[draggedIndex].style.backgroundPosition] =
+                    [board.children[draggedIndex].style.backgroundPosition, targetPiece.style.backgroundPosition];
+            }
+        };
+    </script>
+</body>
+</html>
