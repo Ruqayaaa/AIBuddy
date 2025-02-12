@@ -40,6 +40,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            width: 100%;
         }
 
         .dark-mode .top-nav {
@@ -278,7 +279,7 @@
 
         .dark-mode .resource-card {
             background: var(--dark-card-bg);
-            border-color: var(--dark-button-bg);
+            border-color: var (--dark-button-bg);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -345,7 +346,7 @@
         }
 
         .dark-mode footer {
-            background: linear-gradient(135deg, var(--dark-bg), var (--dark-card-bg));
+            background: linear-gradient(135deg, var(--dark-bg), var(--dark-card-bg));
             color: var(--dark-text);
         }
 
@@ -361,8 +362,38 @@
 
         /* Enhanced mobile responsiveness */
         @media (max-width: 768px) {
-            .container {
+            .top-nav {
+                padding: 1rem 4rem; /* Adjust padding for mobile */
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hamburger div {
+                width: 25px;
+                height: 3px;
+                background-color: white;
+                margin: 5px 0;
+                transition: 0.4s;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: linear-gradient(135deg, var(--blue), var(--mint));
+                width: 100%;
                 padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
 
             header {
@@ -372,6 +403,10 @@
 
             header h1 {
                 font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
             }
 
             .section {
@@ -395,6 +430,11 @@
                 <a href="kids-case-studies.html">Cool Stories</a>
                 <a href="ai-education-resources.html">Fun Activities</a>
                 <a href="team.htm">Meet the Team</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
     </nav>
@@ -434,7 +474,6 @@
                     <h3>🧩 Robot Puzzle Pack</h3>
                     <p>Challenge yourself with our super-fun robot puzzles!</p>
                     <a href="final_robot_puzzles_pack (2).html" class="button">Get Puzzles</a>
-                   
                 </div>
                 <div class="resource-card">
                     <h3>🎨 Color with Robots</h3>
@@ -507,6 +546,13 @@
             }
         });
 
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
     </script>
 </body>
 </html>
