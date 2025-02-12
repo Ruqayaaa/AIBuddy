@@ -17,7 +17,7 @@
             font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 4rem;
+            padding: 0;
             background-color: var(--white);
         }
 
@@ -466,18 +466,14 @@
 
         function readCaseStudy(content) {
             if (isNarrating) {
-                window.speechSynthesis.pause();
+                window.speechSynthesis.cancel();
                 isNarrating = false;
             } else {
-                if (speechSynthesisUtterance) {
-                    window.speechSynthesis.resume();
-                } else {
-                    speechSynthesisUtterance = new SpeechSynthesisUtterance(content);
-                    speechSynthesisUtterance.pitch = 1.5; // Higher pitch for child-like voice
-                    speechSynthesisUtterance.rate = 1.2; // Slightly faster rate
-                    speechSynthesisUtterance.voice = speechSynthesis.getVoices().find(voice => voice.name.includes('Google UK English Female')); // Example voice, adjust as needed
-                    window.speechSynthesis.speak(speechSynthesisUtterance);
-                }
+                speechSynthesisUtterance = new SpeechSynthesisUtterance(content);
+                speechSynthesisUtterance.pitch = 1.5; // Higher pitch for child-like voice
+                speechSynthesisUtterance.rate = 1.2; // Slightly faster rate
+                speechSynthesisUtterance.voice = speechSynthesis.getVoices().find(voice => voice.name.includes('Google UK English Female')); // Example voice, adjust as needed
+                window.speechSynthesis.speak(speechSynthesisUtterance);
                 isNarrating = true;
             }
         }
@@ -498,3 +494,60 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
