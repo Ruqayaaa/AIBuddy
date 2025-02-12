@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsible AI for Kids</title>
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --mint: #ACECA1;
+            --yellow: #EDB230;
+            --orange: #E77728;
+            --blue: #2F97C1;
+            --black: #000000;
+            --dark-bg: #2c3e50;
+            --dark-mint: #1e3a3a;
+            --dark-blue: #1a2b3c;
+        }
+
+        body {
+            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--blue), var(--mint));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+
+        .dark-mode {
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-mint));
+            color: var(--white);
+        }
+
+        /* Navigation Styles */
+        .top-nav {
+            width: 100%;
+            background: linear-gradient(135deg, var(--blue), var(--mint));
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dark-mode .top-nav {
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-mint));
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .dark-mode .nav-links a {
+            color: var(--white);
+        }
+
+        .dark-mode .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1000;
+            color: var(--black); /* Set text color to black */
+        }
+
+        .theme-toggle #theme-label {
+            color: var(--black); /* Ensure the theme label text is black */
+        }
+
+        .dark-mode .theme-toggle {
+            background: var(--dark-card-bg);
+            color: var(--dark-text);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--black);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #2c3e50;
+            color: var(--white);
+        }
+
+        .dark-mode .video-container {
+            background-color: #34495e;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mascot Section */
+        .mascot-container {
+            text-align: center;
+            cursor: pointer;
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .mascot-container img {
+            width: 50%;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Video Section */
+        .video-section {
+            width: 100%;
+            text-align: center;
+        }
+
+        .video-container {
+            aspect-ratio: 16 / 9;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin-top: 1rem;
+            width: 100%; /* Make video container wider */
+            max-width: 4000px; /* Increase the max width */
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Start Here Button */
+        .start-button {
+            display: inline-block;
+            background-color: var(--orange);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .start-button:hover {
+            background-color: var(--yellow);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .mascot-container img {
+                width: 100%;
+                height: auto;
+            }
+
+            .video-container {
+                max-width: 100%; /* Adjust video container for mobile */
+            }
+
+            .start-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .theme-toggle {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .theme-toggle #theme-label {
+                font-size: 0.8rem;
+            }
+
+            .switch {
+                width: 40px;
+                height: 24px;
+            }
+
+            .slider:before {
+                height: 20px;
+                width: 20px;
+                left: 2px;
+                bottom: 2px;
+            }
+
+            input:checked + .slider:before {
+                transform: translateX(16px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .content-wrapper {
+                gap: 1rem;
+            }
+
+            .video-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .start-button {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="kids-ai-homepage.html">Home</a>
+                <a href="kids-ai-principles.html">AI Principles</a>
+                <a href="kids-case-studies.html">Cool Stories</a>
+                <a href="ai-education-resources.html">Fun Activities</a>
+                <a href="team.htm">Meet the Team</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+        </label>
+        <span id="theme-label">🌞 Light Mode</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>🤖 Welcome to AI Adventures!</h1>
+        <p>Let's learn about AI together in a fun and safe way!</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="mascot-container" id="mascot-section">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ai-mascot-mCDl0k640mLkPQjkJgZvhkdt8QitMW.png" alt="AI Mascot">
+        </div>
+        <div class="content-wrapper">
+            <!-- Video Section -->
+            <div class="video-section">
+                <h2>Being Responsible with AI</h2>
+                <div class="video-container">
+                    <iframe src="responsible-ai-video.mp4" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Start Here Button -->
+            <a href="kids-ai-principles.html" class="start-button">Start Here</a>
+        </div>
+    </div>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const themeLabel = document.getElementById('theme-label');
+        const body = document.body;
+
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) {
+                body.classList.add('dark-mode');
+                themeLabel.textContent = '🌙 Dark Mode';
+            } else {
+                body.classList.remove('dark-mode');
+                themeLabel.textContent = '🌞 Light Mode';
+            }
+        });
+
+        // Mascot interaction with audio
+        const mascotSection = document.getElementById('mascot-section');
+        const mascotMessage = document.getElementById('mascot-message');
+        const messages = [
+            "Hi! I'm Byte, your AI learning buddy! 👋",
+            "Want to learn something cool about AI? 🤓",
+            "Let's explore the world of AI together! 🌟",
+            "Remember to be safe and responsible with AI! 🛡️"
+        ];
+
+        setInterval(() => {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            mascotMessage.textContent = randomMessage;
+        }, 5000);
+
+        // Add audio interaction
+        mascotSection.addEventListener('click', () => {
+            const audio = new Audio('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ai-greeting%20(1)-rnBd9IZeyPbStb1Vj5YCOh6SB1dGBh.mp3');
+            audio.play();
+        });
+    </script>
+</body>
+</html>
