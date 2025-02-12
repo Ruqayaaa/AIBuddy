@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Our Team</title>
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --mint: #ACECA1;
+            --yellow: #EDB230;
+            --orange: #E77728;
+            --blue: #2F97C1;
+            --black: #000000;
+            --dark-bg: #2c3e50;
+            --dark-mint: #1e3a3a;
+            --dark-blue: #1a2b3c;
+            --dark-card-bg: #34495e;
+            --dark-text: #ecf0f1;
+            --dark-button-bg: #2980b9;
+            --dark-button-hover-bg: #3498db;
+        }
+
+        body {
+            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--blue), var(--mint));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+
+        .dark-mode {
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-mint));
+            color: var(--white);
+        }
+
+        /* Navigation Styles */
+        .top-nav {
+            width: 100%;
+            background: linear-gradient(135deg, var(--blue), var(--mint));
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dark-mode .top-nav {
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-mint));
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .dark-mode .nav-links a {
+            color: var(--white);
+        }
+
+        .dark-mode .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 6rem 2rem; /* Increased padding for longer header */
+            width: 100%; /* Make header full width */
+            background: linear-gradient(135deg, var(--blue), var(--mint));
+            color: white;
+            position: relative;
+        }
+
+        .dark-mode header {
+            background: linear-gradient(135deg, var(--dark-bg), var(--dark-card-bg));
+            color: var(--dark-text);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 1000;
+            color: var(--black); /* Set text color to black */
+        }
+
+        .theme-toggle #theme-label {
+            color: var(--black); /* Ensure the theme label text is black */
+        }
+
+        .dark-mode .theme-toggle {
+            background: var(--dark-card-bg);
+            color: var(--dark-text);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--black);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--blue);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #2c3e50;
+            color: var(--white);
+        }
+
+        .dark-mode .video-container {
+            background-color: #34495e;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mascot Section */
+        .mascot-container {
+            text-align: center;
+            cursor: pointer;
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .mascot-container img {
+            width: 50%;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 3rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .team-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            text-align: center;
+            color: black; /* Set text color to black */
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            background-color: #2F97C1;
+            color: white;
+        }
+
+        .member-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            transition: color 0.3s ease;
+        }
+
+        .team-card:hover h3 {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Speech Bubble */
+        .speech-bubble {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1.2rem;
+            font-weight: bold;
+            max-width: 300px;
+        }
+
+        .mascot-img {
+            width: 120px;
+            height: 120px;
+            transition: opacity 0.3s ease;
+        }
+
+        .mascot-speaking {
+            animation: lipMove 0.2s infinite alternate;
+        }
+
+        @keyframes lipMove {
+            0% { transform: scaleY(1); }
+            100% { transform: scaleY(0.8); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .mascot-container img {
+                width: 100%;
+                height: auto;
+            }
+
+            .video-container {
+                max-width: 100%; /* Adjust video container for mobile */
+            }
+
+            .start-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .theme-toggle {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .theme-toggle #theme-label {
+                font-size: 0.8rem;
+            }
+
+            .switch {
+                width: 40px;
+                height: 24px;
+            }
+
+            .slider:before {
+                height: 20px;
+                width: 20px;
+                left: 2px;
+                bottom: 2px;
+            }
+
+            input:checked + .slider:before {
+                transform: translateX(16px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .content-wrapper {
+                gap: 1rem;
+            }
+
+            .video-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .start-button {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="kids-ai-homepage.html">Home</a>
+                <a href="kids-ai-principles.html">AI Principles</a>
+                <a href="kids-case-studies.html">Cool Stories</a>
+                <a href="ai-education-resources.html">Fun Activities</a>
+                <a href="team.htm">Meet the Team</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <label class="switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+        </label>
+        <span id="theme-label">🌞 Light Mode</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>Meet Our Team</h1>
+        <p>Get to know the amazing people behind AI Buddy!</p>
+    </header>
+
+ 
+    <div class="container">
+        <div class="mascot-container" id="mascot-section">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ai-mascot-mCDl0k640mLkPQjkJgZvhkdt8QitMW.png" alt="AI Mascot" class="mascot-img" id="mascot-image">
+            
+        <div class="content-wrapper">
+            <!-- Team Section -->
+            <div class="team-section">
+                <div class="team-grid" id="team-container">
+                    <!-- Team Members will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const themeLabel = document.getElementById('theme-label');
+        const body = document.body;
+
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) {
+                body.classList.add('dark-mode');
+                themeLabel.textContent = '🌙 Dark Mode';
+            } else {
+                body.classList.remove('dark-mode');
+                themeLabel.textContent = '🌞 Light Mode';
+            }
+        });
+
+        const mascotImage = document.getElementById("mascot-image");
+        const mascotSpeech = document.getElementById("mascot-speech");
+
+        function speak(text) {
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "en-US";
+
+            speech.onstart = () => {
+                mascotImage.classList.add("mascot-speaking");
+            };
+
+            speech.onend = () => {
+                mascotImage.classList.remove("mascot-speaking");
+            };
+
+            window.speechSynthesis.speak(speech);
+        }
+
+        const teamMembers = [
+            { name: "Ruqaya", role: "Back-end Developer", img: "mascot5.jpeg" },
+            { name: "Zainab", role: "Front-end Developer", img: "mascot2.jpeg" },
+            { name: "Ashad", role: "UI/UX Designer", img: "mascot3.jpeg" },
+            { name: "Ali Amer", role: "Project Manager", img: "mascot4.jpeg" }
+        ];
+
+        const teamContainer = document.getElementById("team-container");
+
+        teamMembers.forEach((member, i) => {
+            const card = document.createElement("div");
+            card.classList.add("team-card");
+            card.innerHTML = `
+                <img src="${member.img}" alt="${member.name}" class="member-photo">
+                <h3>${member.name}</h3>
+                <p>${member.role}</p>
+            `;
+            card.addEventListener("mouseenter", () => {
+                mascotSpeech.textContent = `Meet ${member.name}, our ${member.role}!`;
+                speak(`Meet ${member.name}, our ${member.role}!`);
+            });
+            teamContainer.appendChild(card);
+        });
+
+        const textArray = ["Developers!", "Designers!", "Innovators!", "Creators!"];
+        let textIndex = 0;
+        let charIndex = 0;
+        const dynamicText = document.getElementById("dynamic-text");
+
+        function typeEffect() {
+            if (charIndex < textArray[textIndex].length) {
+                dynamicText.textContent += textArray[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 150);
+            } else {
+                setTimeout(eraseEffect, 1500);
+            }
+        }
+
+        function eraseEffect() {
+            if (charIndex > 0) {
+                dynamicText.textContent = textArray[textIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(eraseEffect, 100);
+            } else {
+                textIndex = (textIndex + 1) % textArray.length;
+                setTimeout(typeEffect, 300);
+            }
+        }
+
+        typeEffect();
+    </script>
+</body>
+</html>
+
