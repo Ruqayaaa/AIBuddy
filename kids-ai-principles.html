@@ -531,10 +531,11 @@
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
-                width: 100%; /* Ensure the body takes full width */
+                width: 100vw; /* Ensure the body takes full width */
                 display: flex;
                 flex-direction: column;
                 align-items: center; /* Center the content */
+                box-sizing: border-box; /* Include padding in the element's total width and height */
             }
 
             .top-nav {
@@ -598,10 +599,11 @@
         @media (max-width: 480px) {
             body {
                 padding: 1rem;
-                width: 100%; /* Ensure the body takes full width */
+                width: 100vw; /* Ensure the body takes full width */
                 display: flex;
                 flex-direction: column;
                 align-items: center; /* Center the content */
+                box-sizing: border-box; /* Include padding in the element's total width and height */
             }
 
             .top-nav {
