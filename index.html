@@ -288,7 +288,7 @@
 
             .hamburger {
                 display: block;
-                cursor: pointer;
+                
             }
 
             .hamburger div {
@@ -311,6 +311,20 @@
                 padding: 1rem;
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
+
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
 
             .dark-mode .nav-links.active {
                 background: linear-gradient(135deg, var(--dark-blue), var(--dark-mint));
