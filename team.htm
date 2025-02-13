@@ -88,6 +88,49 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        .nav-links-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            background: linear-gradient(135deg, var(--blue), var(--mint));
+            padding: 1rem;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links-mobile a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-links-mobile a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links-mobile.show {
+            display: flex;
+        }
+
         /* Header Styles */
         header {
             text-align: center;
@@ -322,6 +365,27 @@
                 display: none;
             }
 
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links-mobile {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background: linear-gradient(135deg, var(--blue), var(--mint));
+                padding: 1rem;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links-mobile.show {
+                display: flex;
+            }
+
             header h1 {
                 font-size: 2.5rem;
             }
@@ -399,13 +463,25 @@
     <!-- Navigation -->
     <nav class="top-nav">
         <div class="nav-container">
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links">
                 <a href="index.html">Home</a>
                 <a href="kids-ai-principles.html">AI Principles</a>
                 <a href="kids-case-studies.html">Cool Stories</a>
                 <a href="ai-education-resources.html">Fun Activities</a>
                 <a href="team.htm">Meet the Team</a>
             </div>
+            <div class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="nav-links-mobile" id="nav-links-mobile">
+            <a href="index.html">Home</a>
+            <a href="kids-ai-principles.html">AI Principles</a>
+            <a href="kids-case-studies.html">Cool Stories</a>
+            <a href="ai-education-resources.html">Fun Activities</a>
+            <a href="team.htm">Meet the Team</a>
         </div>
     </nav>
 
@@ -424,11 +500,10 @@
         <p>Get to know the amazing people behind AI Buddy!</p>
     </header>
 
- 
     <div class="container">
         <div class="mascot-container" id="mascot-section">
             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ai-mascot-mCDl0k640mLkPQjkJgZvhkdt8QitMW.png" alt="AI Mascot" class="mascot-img" id="mascot-image">
-            
+        </div>
         <div class="content-wrapper">
             <!-- Team Section -->
             <div class="team-section">
@@ -454,8 +529,15 @@
             }
         });
 
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const navLinksMobile = document.getElementById('nav-links-mobile');
+
+        hamburger.addEventListener('click', () => {
+            navLinksMobile.classList.toggle('show');
+        });
+
         const mascotImage = document.getElementById("mascot-image");
-        const mascotSpeech = document.getElementById("mascot-speech");
 
         function speak(text) {
             const speech = new SpeechSynthesisUtterance(text);
@@ -490,7 +572,6 @@
                 <p>${member.role}</p>
             `;
             card.addEventListener("mouseenter", () => {
-                mascotSpeech.textContent = `Meet ${member.name}, our ${member.role}!`;
                 speak(`Meet ${member.name}, our ${member.role}!`);
             });
             teamContainer.appendChild(card);
