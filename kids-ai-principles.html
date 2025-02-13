@@ -531,11 +531,10 @@
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
-                width: 100vw; /* Ensure the body takes full width */
+                width: 100%; /* Ensure the body takes full width */
                 display: flex;
                 flex-direction: column;
                 align-items: center; /* Center the content */
-                box-sizing: border-box; /* Include padding in the element's total width and height */
             }
 
             .top-nav {
@@ -599,11 +598,10 @@
         @media (max-width: 480px) {
             body {
                 padding: 1rem;
-                width: 100vw; /* Ensure the body takes full width */
+                width: 100%; /* Ensure the body takes full width */
                 display: flex;
                 flex-direction: column;
                 align-items: center; /* Center the content */
-                box-sizing: border-box; /* Include padding in the element's total width and height */
             }
 
             .top-nav {
@@ -731,32 +729,6 @@
 
     <div class="modal" id="modal">
         <div class="modal-content">
-            <button class="close-button" onclick="closeModal()">×</button>
-            <h2 id="modal-title" style="margin-bottom: 1rem;"></h2>
-            <div id="modal-content"></div>
-        </div>
-    </div>
-
-    <footer>
-        <p>Made with ❤️ for young AI explorers!</p>
-    </footer>
-
-    <script>
-        function showModal(principle) {
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalContent = document.getElementById('modal-content');
-
-            // Replace these URLs with actual educational videos about AI safety
-            const videos = {
-                'mistakes': 'false info.mp4',
-                'emotions': 'feelings.mp4',
-                'privacy': 'personal info.mp4',
-                'fake': 'fake content.mp4',
-                'cheating': 'cheating.mp4',
-                'help': 'adults.mp4'
-            };
-
             const content = {
                 'mistakes': `
                     <div class="video-container">
